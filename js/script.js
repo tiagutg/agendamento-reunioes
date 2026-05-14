@@ -74,4 +74,63 @@ const sidebar = document.getElementById("sidebar");
 // Evento de clique
 menuToggle.addEventListener("click", () => {
     sidebar.classList.toggle("hidden");
+}); 
+const mainContent = document.getElementById("mainContent");
+const menuAgendamentos = document.getElementById("menuAgendamentos");
+const menuNotificacoes = document.getElementById("menuNotificacoes");
+// Salvando o conteúdo inicial da página
+const conteudoInicial = mainContent.innerHTML;
+
+menuNotificacoes.addEventListener("click", () => {
+    mainContent.innerHTML = `
+        <h1 class="page-title">Notificações</h1>
+
+        <div class="card">
+            <div class="top-bar">
+                <input 
+                    type="text" 
+                    placeholder="Buscar..." 
+                    class="search-notification"
+                >
+
+                <button class="filter-btn">
+                    <i class="fa-solid fa-filter"></i>
+                    Filtros
+                </button>
+            </div>
+
+            <div class="notification-item">
+                <h3>Reunião confirmada</h3>
+                <p>Professor: João Silva</p>
+                <span>14/05/2026 às 19:30</span>
+            </div>
+
+            <div class="notification-item">
+                <h3>Lembrete de reunião</h3>
+                <p>Sua reunião começa em 30 minutos</p>
+                <span>14/05/2026 às 18:00</span>
+            </div>
+        </div>
+    `;
+
+    menuAgendamentos.classList.remove("active");
+    menuNotificacoes.classList.add("active");
+});
+
+menuAgendamentos.addEventListener("click", () => {
+
+    // Volta o conteúdo original
+    mainContent.innerHTML = conteudoInicial;
+
+    // Troca menu ativo
+    menuNotificacoes.classList.remove("active");
+    menuAgendamentos.classList.add("active");
+
+});
+
+const notificationBell = document.getElementById("notificationBell");
+const notificationDropdown = document.getElementById("notificationDropdown");
+
+notificationBell.addEventListener("click", () => {
+    notificationDropdown.classList.toggle("show");
 });

@@ -12,6 +12,7 @@
 
   <!-- HEADER SUPERIOR IGUAL AO ESTILO DO AVA -->
   <header>
+    
     <div class="header-left">
       <div class="menu-icon" id="menuToggle">☰</div>
       <div class="logo">
@@ -20,7 +21,66 @@
     </div>
 
     <div class="header-right">
-      <i class="fa-regular fa-bell"></i>
+     <div class="notification-wrapper">
+
+    <i class="fa-regular fa-bell" id="notificationBell"></i>
+
+    <span class="notification-dot"></span>
+
+    <div class="notification-dropdown" id="notificationDropdown">
+
+        <div class="notification-header">
+            <strong>Notificações</strong>
+            <span>Marcar tudo como lido</span>
+        </div>
+
+        <div class="dropdown-item">
+
+            <div class="mail-icon">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+
+            <div>
+                <h4>Você tem uma nova mensagem</h4>
+
+                <p>
+                    REUNIÃO CONFIRMADA
+                </p>
+
+                <small>
+                    Hoje - 14:30
+                </small>
+            </div>
+
+            <span class="item-dot"></span>
+
+        </div>
+
+        <div class="dropdown-item">
+
+            <div class="mail-icon">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+
+            <div>
+                <h4>Lembrete de reunião</h4>
+
+                <p>
+                    Sua reunião começa em 30 minutos
+                </p>
+
+                <small>
+                    Hoje - 18:00
+                </small>
+            </div>
+
+            <span class="item-dot"></span>
+
+        </div>
+
+    </div>
+
+</div>
       <div>▦</div>
       <div class="avatar">TA</div>
     </div>
@@ -42,19 +102,19 @@
   </div>
 </a>
 
-<div class="menu-item">
+<div class="menu-item active" id="menuAgendamentos">
     <i class="fa-regular fa-calendar"></i>
     <span>Agendamentos</span>
 </div>
 
-<div class="menu-item">
+<div class="menu-item" id="menuNotificacoes">
     <i class="fa-regular fa-bell"></i>
     <span>Notificações</span>
 </div>
     </aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
-    <main>
+    <main id="mainContent">
       <h1 class="page-title">Agendamento de Reuniões</h1>
 
       <div class="content-grid">
