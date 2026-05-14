@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Agendamento de Reuniões - AVA</title>
+</head>
+
+<body>
+
+  <!-- HEADER SUPERIOR IGUAL AO ESTILO DO AVA -->
+  <header>
+    <div class="header-left">
+      <div class="menu-icon" id="menuToggle">☰</div>
+      <div class="logo">
+    <img src="img/logoUniSales.png" alt="Logo UniSales">
+</div>
+    </div>
+
+    <div class="header-right">
+      <i class="fa-regular fa-bell"></i>
+      <div>▦</div>
+      <div class="avatar">TA</div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- MENU LATERAL ESQUERDO -->
+    <aside id="sidebar">
+    <div class="search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" placeholder="Buscar..." />
+</div>
+
+<a href="https://unisales.grupoa.education/plataforma/" class="menu-link">
+  <div class="menu-item">
+    <i class="fa-solid fa-house"></i>
+    <span>Home</span>
+  </div>
+</a>
+
+<div class="menu-item">
+    <i class="fa-regular fa-calendar"></i>
+    <span>Agendamentos</span>
+</div>
+
+<div class="menu-item">
+    <i class="fa-regular fa-bell"></i>
+    <span>Notificações</span>
+</div>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+      <h1 class="page-title">Agendamento de Reuniões</h1>
+
+      <div class="content-grid">
+
+        <!-- FORMULÁRIO PARA AGENDAR REUNIÃO -->
+        <section class="card">
+          <h2>Nova reunião</h2>
+
+          <form id="formAgendamento">
+
+            <label for="professor">Professor ou Coordenador</label>
+            <select id="professor" required>
+              <option value="">Selecione...</option>
+              <option>Prof. João Silva</option>
+              <option>Profª. Maria Souza</option>
+              <option>Coordenador Carlos Mendes</option>
+            </select>
+
+            <label for="data">Data da reunião</label>
+            <input type="date" id="data" required />
+
+            <label for="hora">Horário</label>
+            <input type="time" id="hora" required />
+
+            <label for="formato">Formato</label>
+            <select id="formato" required>
+              <option value="">Selecione...</option>
+              <option>Presencial</option>
+              <option>Online</option>
+              <option>Híbrida</option>
+            </select>
+
+            <label for="topico">Tópico da reunião</label>
+            <input type="text" id="topico" placeholder="Ex: Dúvida sobre disciplina" required />
+
+            <label for="resumo">Resumo</label>
+            <textarea id="resumo" placeholder="Descreva rapidamente o motivo da reunião..." required></textarea>
+
+            <button type="submit">Agendar reunião</button>
+          </form>
+        </section>
+
+        <!-- LISTA DE AGENDAMENTOS -->
+        <section class="card">
+          <h2>Meus agendamentos</h2>
+
+          <div id="listaAgendamentos" class="agenda-list">
+            <div class="empty">Nenhuma reunião agendada ainda.</div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>
