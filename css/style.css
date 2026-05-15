@@ -18,20 +18,21 @@
        HEADER SUPERIOR
     ========================== */
     header {
-      height: 70px;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      border-bottom: 1px solid #d9e1e8;
-    }
+    height: 70px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-bottom: 1px solid #d9e1e8;
+}
 
     .header-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
 
     .menu-icon {
       font-size: 26px;
@@ -114,23 +115,7 @@
       border-right: 1px solid #d9e1e8;
     }
 
-    .search {
-      background: #2f4050;
-      padding: 15px;
-    }
-
-    .search input {
-      width: 100%;
-      max-width: 160px;
-      padding: 11px;
-      border: none;
-      border-radius: 3px;
-      background: #5b6b7a;
-      color: white;
-      outline: none;
-    }
-
-    .search input::placeholder {
+      .search input::placeholder {
       color: white;
     }
 
@@ -143,9 +128,48 @@
     gap: 10px;
 }
 
-    .search i {
-    color: #cbd5df;
-    font-size: 18px;
+  .search i {
+    color: #dbe2ea;
+    font-size: 20px;
+
+    min-width: 20px;
+}
+
+  .search {
+    background: #2f4050;
+
+    display: flex;
+    align-items: center;
+
+    padding: 16px 18px;
+
+    gap: 14px;
+}
+
+
+.search i {
+    color: #dbe2ea;
+    font-size: 20px;
+    width: 22px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+   .search input {
+    flex: 1;
+
+    height: 42px;
+
+    border: none;
+    border-radius: 4px;
+
+    background: #5b6b7a;
+
+    padding: 0 14px;
+
+    color: white;
+
+    outline: none;
 }
 
     .menu-item {
@@ -453,4 +477,205 @@
     height: 7px;
     background: #c21f3a;
     border-radius: 50%;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+
+    #sidebar {
+        position: fixed;
+        left: -280px;
+        top: 70px;
+        width: 280px;
+        height: calc(100vh - 70px);
+        background: white;
+        z-index: 1001;
+        transition: 0.3s;
+    }
+
+    #sidebar.show {
+        left: 0;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(0,0,0,0.35);
+        z-index: 1000;
+        display: none;
+    }
+
+    .overlay.show {
+        display: block;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1002;
+    }
+}
+
+/* =========================
+   CONTA / AVATAR
+========================= */
+
+.account-wrapper {
+    position: relative;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: #a0003c;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* Dropdown */
+.account-dropdown {
+
+    display: none;
+
+    position: absolute;
+
+    top: 58px;
+    right: 0;
+
+    width: 270px;
+
+    background: white;
+
+    border: 1px solid #d9e1e8;
+
+    box-shadow: 0 4px 18px rgba(0,0,0,0.20);
+
+    z-index: 1000;
+}
+
+/* Abrir dropdown */
+.account-dropdown.show {
+    display: block;
+}
+
+/* Cabeçalho */
+.account-header {
+    padding: 18px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.account-header h3 {
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: #233445;
+}
+
+.account-header p {
+    font-size: 13px;
+    font-weight: bold;
+    color: #3b556d;
+    margin-bottom: 3px;
+}
+
+.account-header span {
+    font-size: 13px;
+    color: #5f7387;
+}
+
+/* Opções */
+.account-item {
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 16px 24px;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #edf1f5;
+}
+
+.account-item:hover {
+    background: #f5f7fa;
+}
+
+.account-item i {
+    color: #55697d;
+    font-size: 15px;
+}
+
+.account-item span {
+    color: #33475b;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 2000;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.notification-modal {
+    width: 520px;
+    max-width: 90%;
+    background: #ffffff;
+    border: 1px solid #d9e1e8;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 22px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    color: #233445;
+}
+
+#closeModal {
+    background: transparent;
+    color: #233445;
+    font-size: 26px;
+    padding: 0;
+}
+
+.modal-body {
+    padding: 22px;
+}
+
+.modal-body p {
+    margin-bottom: 12px;
+    color: #33475b;
+    line-height: 1.4;
 }

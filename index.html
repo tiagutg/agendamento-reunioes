@@ -8,20 +8,38 @@
   <title>Agendamento de Reuniões - AVA</title>
 </head>
 
+<div class="modal-overlay" id="modalOverlay">
+    <div class="notification-modal">
+        <div class="modal-header">
+            <h2 id="modalTitle">Título</h2>
+            <button id="closeModal">×</button>
+        </div>
+
+        <div class="modal-body">
+            <p id="modalDescription"></p>
+            <p><strong>Professor:</strong> <span id="modalProfessor"></span></p>
+            <p><strong>Data:</strong> <span id="modalDate"></span></p>
+            <p><strong>Horário:</strong> <span id="modalTime"></span></p>
+            <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+        </div>
+    </div>
+</div>
+
 <body>
 
   <!-- HEADER SUPERIOR IGUAL AO ESTILO DO AVA -->
   <header>
-    
+
     <div class="header-left">
       <div class="menu-icon" id="menuToggle">☰</div>
       <div class="logo">
-    <img src="img/logoUniSales.png" alt="Logo UniSales">
+         <img src="img/logoUniSales.png" alt="Logo UniSales">
+  </div>
 </div>
-    </div>
 
     <div class="header-right">
-     <div class="notification-wrapper">
+     
+      <div class="notification-wrapper">
 
     <i class="fa-regular fa-bell" id="notificationBell"></i>
 
@@ -31,10 +49,21 @@
 
         <div class="notification-header">
             <strong>Notificações</strong>
-            <span>Marcar tudo como lido</span>
+            <span id="markAllRead">
+    Marcar tudo como lido
+</span>
         </div>
 
-        <div class="dropdown-item">
+        
+          <div 
+    class="dropdown-item"
+    data-title="Reunião confirmada"
+    data-description="Sua reunião foi confirmada com sucesso."
+    data-professor="João Silva"
+    data-date="14/05/2026"
+    data-time="19:30"
+    data-status="Confirmada"
+>
 
             <div class="mail-icon">
                 <i class="fa-regular fa-envelope"></i>
@@ -56,7 +85,16 @@
 
         </div>
 
-        <div class="dropdown-item">
+        
+    <div 
+    class="dropdown-item"
+    data-title="Lembrete de reunião"
+    data-description="Sua reunião começa em 30 minutos."
+    data-professor="João Silva"
+    data-date="14/05/2026"
+    data-time="18:00"
+    data-status="Em breve"
+>
 
             <div class="mail-icon">
                 <i class="fa-regular fa-envelope"></i>
@@ -82,9 +120,46 @@
 
 </div>
       <div>▦</div>
-      <div class="avatar">TA</div>
+     <div class="account-wrapper">
+
+    <div class="avatar" id="accountButton">
+        TA
+    </div>
+
+    <div class="account-dropdown" id="accountDropdown">
+
+        <div class="account-header">
+
+            <h3>
+                TIAGO LOPES ALVES
+            </h3>
+
+            <p>
+                Ambiente: UNISALES (Graduação)
+            </p>
+
+            <span>
+                Estudante
+            </span>
+
+        </div>
+
+        <div class="account-item">
+            <i class="fa-regular fa-circle-user"></i>
+            <span>Minha conta</span>
+        </div>
+
+        <div class="account-item">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Sair</span>
+        </div>
+
+    </div>
+
+</div>
     </div>
   </header>
+  <div class="overlay" id="overlay"></div>
 
   <div class="container">
 
@@ -92,7 +167,11 @@
     <aside id="sidebar">
     <div class="search">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" placeholder="Buscar..." />
+    <input 
+    type="text" 
+    placeholder="Buscar..." 
+    id="menuSearch"
+/>
 </div>
 
 <a href="https://unisales.grupoa.education/plataforma/" class="menu-link">
