@@ -1,4 +1,4 @@
-    // Pegando o formulário pelo ID
+ // Pegando o formulário pelo ID
     const form = document.getElementById("formAgendamento");
 
     // Pegando a área onde os agendamentos serão exibidos
@@ -70,6 +70,7 @@
 // Pegando os elementos
 const menuToggle = document.getElementById("menuToggle");
 const sidebar = document.getElementById("sidebar");
+
 
 // Evento de clique
 const overlay = document.getElementById("overlay");
@@ -356,3 +357,18 @@ document.addEventListener("click", (event) => {
         notificationDropdown.classList.remove("show");
     }
 });
+
+const searchToggle = document.getElementById("searchToggle");
+
+searchToggle.addEventListener("click", () => {
+
+    // Se menu estiver minimizado
+    if(sidebar.classList.contains("collapsed")){
+
+        // Abre menu
+        sidebar.classList.remove("collapsed");
+
+    }
+
+});
+
