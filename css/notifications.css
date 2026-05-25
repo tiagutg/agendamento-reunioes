@@ -1,0 +1,129 @@
+/* ================================================================
+   css/notifications.css
+   Responsabilidade: Estilos do sino de notificações no header
+   e do dropdown com os itens de notificação.
+   ================================================================ */
+
+
+/* ================================================================
+   WRAPPER DO SINO
+   ================================================================ */
+
+.notification-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Ícone do sino */
+#notificationBell {
+    font-size: 22px;
+    color: #1f2d3d;
+}
+
+/* Bolinha vermelha de não lidas */
+.notification-dot {
+    position: absolute;
+    top: -3px;
+    right: -2px;
+    width: 9px;
+    height: 9px;
+    background: #c21f3a;
+    border-radius: 50%;
+}
+
+
+/* ================================================================
+   DROPDOWN DE NOTIFICAÇÕES
+   ================================================================ */
+
+.notification-dropdown {
+    position: absolute;
+    top: 38px;
+    right: -80px;
+    width: 330px;
+    max-height: 420px;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #d0e1e8;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: all 0.25s ease;
+}
+
+.notification-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Cabeçalho do dropdown */
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.notification-header span {
+    font-size: 12px;
+    color: #006999;
+}
+
+
+/* ================================================================
+   ITEM DO DROPDOWN
+   ================================================================ */
+
+.dropdown-item {
+    position: relative;
+    display: flex;
+    gap: 14px;
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+}
+
+/* Ícone circular de envelope */
+.mail-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f3f5f7;
+    color: #c21f3a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dropdown-item h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.dropdown-item p {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1f2d3d;
+    margin-bottom: 4px;
+}
+
+.dropdown-item small {
+    font-size: 12px;
+    color: #3b5a70;
+}
+
+/* Bolinha individual por notificação */
+.item-dot {
+    position: absolute;
+    right: 16px;
+    top: 24px;
+    width: 7px;
+    height: 7px;
+    background: #c21f3a;
+    border-radius: 50%;
+}

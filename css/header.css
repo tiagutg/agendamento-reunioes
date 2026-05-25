@@ -1,0 +1,81 @@
+/* ================================================================
+   css/header.css
+   Responsabilidade: Estilos do cabeçalho fixo superior.
+   Contém: header, header-left, menu-icon, logo, header-right, avatar.
+   ================================================================ */
+
+
+/* ================================================================
+   HEADER — BARRA SUPERIOR FIXA
+   ================================================================ */
+
+header {
+    height: 70px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-bottom: 1px solid #d9e1e8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+}
+
+
+/* ================================================================
+   LADO ESQUERDO — hambúrguer + logo
+   ================================================================ */
+
+.header-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+/* Ícone ☰ que abre/fecha a sidebar */
+.menu-icon {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Wrapper do logotipo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+/* Imagem do logotipo */
+.logo img {
+    height: 30px;
+    object-fit: contain;
+}
+
+
+/* ================================================================
+   LADO DIREITO — notificações, grade, avatar
+   ================================================================ */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    font-size: 22px;
+}
+
+/* Avatar circular com iniciais */
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #b0183a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 15px;
+}

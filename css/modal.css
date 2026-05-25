@@ -1,0 +1,89 @@
+/* ================================================================
+   css/modal.css
+   Responsabilidade: Estilos do modal de detalhes da notificação.
+   ================================================================ */
+
+
+/* ================================================================
+   OVERLAY — fundo escurecido
+   ================================================================ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ================================================================
+   CAIXA DO MODAL
+   ================================================================ */
+
+.notification-modal {
+    width: 520px;
+    max-width: 90%;
+    background: #ffffff;
+    border: 1px solid #d9e1e8;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-30px);
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.show .notification-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Cabeçalho com título e botão fechar */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    color: #233445;
+}
+
+/* Botão × */
+#closeModal {
+    background: transparent;
+    color: #233445;
+    font-size: 26px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    margin-top: 0;
+    font-weight: normal;
+}
+
+/* Corpo do modal */
+.modal-body {
+    padding: 22px;
+}
+
+.modal-body p {
+    margin-bottom: 12px;
+    color: #33475b;
+    line-height: 1.4;
+    display: block;
+}

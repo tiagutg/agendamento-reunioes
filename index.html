@@ -1,15 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
+<!-- ================================================================
+     index.html — AgendeUniSales
+     Sistema de Agendamento de Reuniões — UniSales
+
+     Seções:
+       1. <head>    — Meta, título, CSS (ordem: base → componentes → responsivo)
+       2. Modal     — Overlay de detalhes (fora do body, comportamento original)
+       3. Header    — Barra superior fixa (não alterada)
+       4. Overlay   — Véu escuro mobile
+       5. Container — Sidebar + Main
+       6. Scripts   — JS em ordem de dependência
+     ================================================================ -->
+
 <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Agendamento de Reuniões - AVA</title>
+
+    <!-- Font Awesome — ícones -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <!-- ============================================================
+         CSS — ordem: base → componentes externos → responsivo
+    ============================================================= -->
     <link rel="stylesheet" href="css/style.css">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <title>Agendamento de Reuniões - AVA</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
 </head>
+
+
+<!-- ================================================================
+     MODAL DE DETALHES DA NOTIFICAÇÃO
+     Mantido fora do <body> conforme comportamento original.
+     ================================================================ -->
 
 <div class="modal-overlay" id="modalOverlay">
     <div class="notification-modal">
+
         <div class="modal-header">
             <h2 id="modalTitle">Título</h2>
             <button id="closeModal">×</button>
@@ -18,243 +57,283 @@
         <div class="modal-body">
             <p id="modalDescription"></p>
             <p><strong>Professor:</strong> <span id="modalProfessor"></span></p>
-            <p><strong>Data:</strong> <span id="modalDate"></span></p>
-            <p><strong>Horário:</strong> <span id="modalTime"></span></p>
-            <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+            <p><strong>Data:</strong>      <span id="modalDate"></span></p>
+            <p><strong>Horário:</strong>   <span id="modalTime"></span></p>
+            <p><strong>Status:</strong>    <span id="modalStatus"></span></p>
         </div>
+
     </div>
 </div>
+
 
 <body>
 
-  <!-- HEADER SUPERIOR IGUAL AO ESTILO DO AVA -->
-  <header>
+    <!-- ================================================================
+         HEADER — BARRA SUPERIOR FIXA
+         Componente externo — não alterado.
+         ================================================================ -->
 
-    <div class="header-left">
-      <div class="menu-icon" id="menuToggle">☰</div>
-      <div class="logo">
-         <img src="img/logoUniSales.png" alt="Logo UniSales">
-  </div>
-</div>
+    <header>
 
-    <div class="header-right">
-     
-      <div class="notification-wrapper">
-
-    <i class="fa-regular fa-bell" id="notificationBell"></i>
-
-    <span class="notification-dot"></span>
-
-    <div class="notification-dropdown" id="notificationDropdown">
-
-        <div class="notification-header">
-            <strong>Notificações</strong>
-            <span id="markAllRead">
-    Marcar tudo como lido
-</span>
+        <div class="header-left">
+            <div class="menu-icon" id="menuToggle">☰</div>
+            <div class="logo">
+                <img src="img/logoUniSales.png" alt="Logo UniSales">
+            </div>
         </div>
 
-        
-          <div 
-    class="dropdown-item"
-    data-title="Reunião confirmada"
-    data-description="Sua reunião foi confirmada com sucesso."
-    data-professor="João Silva"
-    data-date="14/05/2026"
-    data-time="19:30"
-    data-status="Confirmada"
->
+        <div class="header-right">
 
-            <div class="mail-icon">
-                <i class="fa-regular fa-envelope"></i>
+            <!-- Sino de notificações -->
+            <div class="notification-wrapper">
+
+                <i class="fa-regular fa-bell" id="notificationBell"></i>
+                <span class="notification-dot"></span>
+
+                <div class="notification-dropdown" id="notificationDropdown">
+
+                    <div class="notification-header">
+                        <strong>Notificações</strong>
+                        <span id="markAllRead">Marcar tudo como lido</span>
+                    </div>
+
+                    <!-- Notificação 1 -->
+                    <div
+                        class="dropdown-item"
+                        data-title="Reunião confirmada"
+                        data-description="Sua reunião foi confirmada com sucesso."
+                        data-professor="João Silva"
+                        data-date="14/05/2026"
+                        data-time="19:30"
+                        data-status="Confirmada"
+                    >
+                        <div class="mail-icon">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Você tem uma nova mensagem</h4>
+                            <p>REUNIÃO CONFIRMADA</p>
+                            <small>Hoje - 14:30</small>
+                        </div>
+                        <span class="item-dot"></span>
+                    </div>
+
+                    <!-- Notificação 2 -->
+                    <div
+                        class="dropdown-item"
+                        data-title="Lembrete de reunião"
+                        data-description="Sua reunião começa em 30 minutos."
+                        data-professor="João Silva"
+                        data-date="14/05/2026"
+                        data-time="18:00"
+                        data-status="Em breve"
+                    >
+                        <div class="mail-icon">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Lembrete de reunião</h4>
+                            <p>Sua reunião começa em 30 minutos</p>
+                            <small>Hoje - 18:00</small>
+                        </div>
+                        <span class="item-dot"></span>
+                    </div>
+
+                </div>
+                <!-- fim .notification-dropdown -->
+
+            </div>
+            <!-- fim .notification-wrapper -->
+
+            <div>▦</div>
+
+            <!-- Avatar e dropdown de conta -->
+            <div class="account-wrapper">
+
+                <div class="avatar" id="accountButton">TA</div>
+
+                <div class="account-dropdown" id="accountDropdown">
+
+                    <div class="account-header">
+                        <h3>TIAGO LOPES ALVES</h3>
+                        <p>Ambiente: UNISALES (Graduação)</p>
+                        <span>Estudante</span>
+                    </div>
+
+                    <div class="account-item">
+                        <i class="fa-regular fa-circle-user"></i>
+                        <span>Minha conta</span>
+                    </div>
+
+                    <div class="account-item">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Sair</span>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- fim .account-wrapper -->
+
+        </div>
+        <!-- fim .header-right -->
+
+    </header>
+
+
+    <!-- Overlay mobile -->
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- ================================================================
+         CONTAINER — Sidebar + Main
+         ================================================================ -->
+
+    <div class="container">
+
+        <!-- ================================================================
+             SIDEBAR — MENU LATERAL
+             Componente externo — não alterado.
+             ================================================================ -->
+
+        <aside id="sidebar">
+
+            <div class="search">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass" id="searchToggle"></i>
+                    <input type="text" placeholder="Buscar..." id="menuSearch">
+                </div>
             </div>
 
-            <div>
-                <h4>Você tem uma nova mensagem</h4>
+            <a href="https://unisales.grupoa.education/plataforma/" class="menu-link">
+                <div class="menu-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </div>
+            </a>
 
-                <p>
-                    REUNIÃO CONFIRMADA
-                </p>
-
-                <small>
-                    Hoje - 14:30
-                </small>
+            <div class="menu-item active" id="menuAgendamentos">
+                <i class="fa-regular fa-calendar"></i>
+                <span>Agendamentos</span>
             </div>
 
-            <span class="item-dot"></span>
-
-        </div>
-
-        
-    <div 
-    class="dropdown-item"
-    data-title="Lembrete de reunião"
-    data-description="Sua reunião começa em 30 minutos."
-    data-professor="João Silva"
-    data-date="14/05/2026"
-    data-time="18:00"
-    data-status="Em breve"
->
-
-            <div class="mail-icon">
-                <i class="fa-regular fa-envelope"></i>
+            <div class="menu-item" id="menuNotificacoes">
+                <i class="fa-regular fa-bell"></i>
+                <span>Notificações</span>
             </div>
 
-            <div>
-                <h4>Lembrete de reunião</h4>
+        </aside>
 
-                <p>
-                    Sua reunião começa em 30 minutos
-                </p>
 
-                <small>
-                    Hoje - 18:00
-                </small>
+        <!-- ================================================================
+             MAIN — ÁREA INTERNA (melhorada)
+             ================================================================ -->
+
+        <main id="mainContent">
+
+            <h1 class="page-title">Agendamento de Reuniões</h1>
+
+            <div class="content-grid">
+
+                <!-- Card: Nova reunião -->
+                <section class="card">
+
+                    <h2>
+                        <i class="fa-regular fa-calendar-plus"></i>
+                        Nova reunião
+                    </h2>
+
+                    <form id="formAgendamento">
+
+                        <label for="professor">Professor ou Coordenador</label>
+                        <select id="professor" required>
+                            <option value="">Selecione...</option>
+                            <option>Prof. João Silva</option>
+                            <option>Profª. Maria Souza</option>
+                            <option>Coordenador Carlos Mendes</option>
+                        </select>
+
+                        <!-- Data e Horário lado a lado -->
+                        <div class="form-row">
+                            <div>
+                                <label for="data">Data da reunião</label>
+                                <input type="date" id="data" required />
+                            </div>
+                            <div>
+                                <label for="hora">Horário</label>
+                                <input type="time" id="hora" required />
+                            </div>
+                        </div>
+
+                        <label for="formato">Formato</label>
+                        <select id="formato" required>
+                            <option value="">Selecione...</option>
+                            <option>Presencial</option>
+                            <option>Online</option>
+                            <option>Híbrida</option>
+                        </select>
+
+                        <label for="topico">Tópico da reunião</label>
+                        <input
+                            type="text"
+                            id="topico"
+                            placeholder="Ex: Dúvida sobre disciplina"
+                            required
+                        />
+
+                        <label for="resumo">Resumo</label>
+                        <textarea
+                            id="resumo"
+                            placeholder="Descreva rapidamente o motivo da reunião..."
+                            required
+                        ></textarea>
+
+                        <button type="submit">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            Agendar reunião
+                        </button>
+
+                    </form>
+
+                </section>
+
+                <!-- Card: Meus agendamentos -->
+                <section class="card">
+
+                    <h2>
+                        <i class="fa-regular fa-calendar-days"></i>
+                        Meus agendamentos
+                    </h2>
+
+                    <div id="listaAgendamentos" class="agenda-list">
+                        <div class="empty">Nenhuma reunião agendada ainda.</div>
+                    </div>
+
+                </section>
+
             </div>
+            <!-- fim .content-grid -->
 
-            <span class="item-dot"></span>
-
-        </div>
-
-    </div>
-
-</div>
-      <div>▦</div>
-     <div class="account-wrapper">
-
-    <div class="avatar" id="accountButton">
-        TA
-    </div>
-
-    <div class="account-dropdown" id="accountDropdown">
-
-        <div class="account-header">
-
-            <h3>
-                TIAGO LOPES ALVES
-            </h3>
-
-            <p>
-                Ambiente: UNISALES (Graduação)
-            </p>
-
-            <span>
-                Estudante
-            </span>
-
-        </div>
-
-        <div class="account-item">
-            <i class="fa-regular fa-circle-user"></i>
-            <span>Minha conta</span>
-        </div>
-
-        <div class="account-item">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            <span>Sair</span>
-        </div>
+        </main>
 
     </div>
+    <!-- fim .container -->
 
-</div>
-    </div>
-  </header>
-  <div class="overlay" id="overlay"></div>
 
-  <div class="container">
+    <!-- ================================================================
+         SCRIPTS — ordem de dependência:
+           1. main.js          formulário e lista
+           2. sidebar.js       menu e navegação
+           3. notifications.js dropdown do sino
+           4. account.js       dropdown da conta
+           5. modal.js         modal (depende de notifications.js)
+         ================================================================ -->
 
-    <!-- MENU LATERAL ESQUERDO -->
-    <aside id="sidebar">
-   <div class="search">
+    <script src="js/main.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/account.js"></script>
+    <script src="js/modal.js"></script>
 
-    <div class="search-box">
-
-        <i class="fa-solid fa-magnifying-glass" id="searchToggle"></i>
-
-        <input 
-            type="text"
-            placeholder="Buscar..."
-            id="menuSearch"
-        >
-
-    </div>
-
-</div>
-
-<a href="https://unisales.grupoa.education/plataforma/" class="menu-link">
-  <div class="menu-item">
-    <i class="fa-solid fa-house"></i>
-    <span>Home</span>
-  </div>
-</a>
-
-<div class="menu-item active" id="menuAgendamentos">
-    <i class="fa-regular fa-calendar"></i>
-    <span>Agendamentos</span>
-</div>
-
-<div class="menu-item" id="menuNotificacoes">
-    <i class="fa-regular fa-bell"></i>
-    <span>Notificações</span>
-</div>
-    </aside>
-
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main id="mainContent">
-      <h1 class="page-title">Agendamento de Reuniões</h1>
-
-      <div class="content-grid">
-
-        <!-- FORMULÁRIO PARA AGENDAR REUNIÃO -->
-        <section class="card">
-          <h2>Nova reunião</h2>
-
-          <form id="formAgendamento">
-
-            <label for="professor">Professor ou Coordenador</label>
-            <select id="professor" required>
-              <option value="">Selecione...</option>
-              <option>Prof. João Silva</option>
-              <option>Profª. Maria Souza</option>
-              <option>Coordenador Carlos Mendes</option>
-            </select>
-
-            <label for="data">Data da reunião</label>
-            <input type="date" id="data" required />
-
-            <label for="hora">Horário</label>
-            <input type="time" id="hora" required />
-
-            <label for="formato">Formato</label>
-            <select id="formato" required>
-              <option value="">Selecione...</option>
-              <option>Presencial</option>
-              <option>Online</option>
-              <option>Híbrida</option>
-            </select>
-
-            <label for="topico">Tópico da reunião</label>
-            <input type="text" id="topico" placeholder="Ex: Dúvida sobre disciplina" required />
-
-            <label for="resumo">Resumo</label>
-            <textarea id="resumo" placeholder="Descreva rapidamente o motivo da reunião..." required></textarea>
-
-            <button type="submit">Agendar reunião</button>
-          </form>
-        </section>
-
-        <!-- LISTA DE AGENDAMENTOS -->
-        <section class="card">
-          <h2>Meus agendamentos</h2>
-
-          <div id="listaAgendamentos" class="agenda-list">
-            <div class="empty">Nenhuma reunião agendada ainda.</div>
-          </div>
-        </section>
-
-      </div>
-    </main>
-  </div>
-  <script src="js/script.js"></script>
 </body>
 </html>

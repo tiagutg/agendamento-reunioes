@@ -1,0 +1,100 @@
+/* =============================================================
+   responsive.css
+   Responsabilidade: Todas as regras de responsividade do projeto.
+   Contém breakpoints para tablet (max-width: 900px) e
+   mobile (max-width: 768px), ajustando layout e sidebar.
+============================================================= */
+
+
+/* =========================
+   TABLET — até 900px
+   Colapsa o grid de cards e a sidebar.
+========================== */
+
+@media (max-width: 900px) {
+
+    /* Empilha sidebar e conteúdo verticalmente */
+    .container {
+        flex-direction: column;
+    }
+
+    /* Sidebar ocupa largura total */
+    aside {
+        width: 100%;
+    }
+
+    /* Cards empilhados em coluna única */
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Padding reduzido nos itens do menu */
+    .menu-item {
+        padding: 14px 20px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE — até 768px
+   Sidebar offcanvas + ajustes mobile.
+========================== */
+
+@media (max-width: 768px) {
+
+    /* Sidebar oculta fora da tela à esquerda */
+    #sidebar {
+        position: fixed;
+        left: -280px;
+        top: 70px;
+        width: 280px;
+        height: calc(100vh - 70px);
+        background: white;
+        z-index: 1001;
+        transition: 0.3s;
+    }
+
+    /* Sidebar visível ao adicionar classe .show */
+    #sidebar.show {
+        left: 0;
+    }
+
+    /* Overlay escuro ao abrir sidebar */
+    .overlay {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 1000;
+        display: none;
+    }
+
+    /* Overlay ativo */
+    .overlay.show {
+        display: block;
+    }
+
+    /* Header fixo no topo */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1002;
+    }
+
+    /* Área principal do sistema */
+    main {
+
+        margin-left: 0;
+
+        width: 100%;
+
+        padding: 16px;
+
+        /* Aproxima conteúdo do header */
+        margin-top: 20px;
+    }
+
+}

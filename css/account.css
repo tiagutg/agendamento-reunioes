@@ -1,0 +1,100 @@
+/* ================================================================
+   css/account.css
+   Responsabilidade: Estilos do avatar e dropdown de conta.
+   ================================================================ */
+
+
+/* ================================================================
+   WRAPPER DA CONTA
+   ================================================================ */
+
+.account-wrapper {
+    position: relative;
+}
+
+/* Avatar com iniciais */
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #a0003c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* ================================================================
+   DROPDOWN DA CONTA
+   ================================================================ */
+
+.account-dropdown {
+    position: absolute;
+    top: 58px;
+    right: 0;
+    width: 270px;
+    background: white;
+    border: 1px solid #d9e1e8;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.20);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: all 0.25s ease;
+}
+
+.account-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Cabeçalho com dados do usuário */
+.account-header {
+    padding: 18px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.account-header h3 {
+    font-size: 15px;
+    margin-bottom: 15px;
+    color: #233445;
+}
+
+.account-header p {
+    font-size: 13px;
+    font-weight: bold;
+    color: #3b556d;
+    margin-bottom: 3px;
+}
+
+.account-header span {
+    font-size: 13px;
+    color: #5f7387;
+}
+
+/* Opções de ação */
+.account-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 24px;
+    cursor: pointer;
+    border-bottom: 1px solid #edf1f5;
+}
+
+.account-item:hover {
+    background: #f5f7fa;
+}
+
+.account-item i {
+    color: #55697d;
+    font-size: 15px;
+}
+
+.account-item span {
+    color: #33475b;
+}

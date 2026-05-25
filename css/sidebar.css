@@ -1,0 +1,139 @@
+/* ================================================================
+   css/sidebar.css
+   Responsabilidade: Estilos do menu lateral esquerdo (sidebar).
+   Contém: estado normal, recolhido (.hidden), campo de busca
+   e itens do menu.
+   ================================================================ */
+
+
+/* ================================================================
+   SIDEBAR — ESTADO NORMAL
+   ================================================================ */
+
+#sidebar {
+    width: 230px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: calc(100vh - 70px);
+    background: white;
+    z-index: 1500;
+}
+
+aside {
+    width: 230px;
+    background: #ffffff;
+    border-right: 1px solid #d9e1e8;
+}
+
+
+/* ================================================================
+   SIDEBAR — ESTADO RECOLHIDO (desktop)
+   Oculta textos, exibe apenas ícones.
+   ================================================================ */
+
+#sidebar.hidden {
+    width: 80px;
+}
+
+#sidebar.hidden span {
+    display: none;
+}
+
+#sidebar.hidden .menu-item {
+    justify-content: center;
+    padding: 18px 0;
+}
+
+#sidebar.hidden .search input {
+    width: 0;
+    padding: 0;
+    border: none;
+    opacity: 0;
+}
+
+
+/* ================================================================
+   CAMPO DE BUSCA INTERNA
+   ================================================================ */
+
+.search {
+    background: #2f4050;
+    padding: 10px;
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+}
+
+.search-box input {
+    width: 100%;
+    height: 44px;
+    border: none;
+    border-radius: 4px;
+    background: #5b6b7a;
+    padding: 0 14px 0 42px;
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 15px;
+    margin-bottom: 0;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.search-box input::placeholder {
+    color: white;
+}
+
+/* Ícone de lupa */
+.search-box i {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    color: #dbe2ea;
+    font-size: 16px;
+    line-height: 1;
+    pointer-events: none;
+}
+
+
+/* ================================================================
+   ITENS DO MENU
+   ================================================================ */
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 24px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #34495e;
+    border-left: 5px solid transparent;
+}
+
+.menu-item:hover {
+    background: #f0f2f4;
+}
+
+/* Item ativo com destaque vermelho */
+.menu-item.active {
+    background: #e6e8ea;
+    border-left: 5px solid #c21f3a;
+    font-weight: bold;
+}
+
+/* Link sem decoração */
+.menu-link,
+.menu-link:hover,
+.menu-link:focus,
+.menu-link:visited {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
