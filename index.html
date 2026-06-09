@@ -31,10 +31,10 @@
          CSS — ordem: base → componentes externos → responsivo
     ============================================================= -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/notifications.css">
-    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="components/header/header.css">
+    <link rel="stylesheet" href="components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="components/header/notifications.css">
+    <link rel="stylesheet" href="components/header/account.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/responsive.css">
 
@@ -191,7 +191,7 @@
 
     <div class="container">
 
-        <!-- ================================================================
+            <!-- ================================================================
              SIDEBAR — MENU LATERAL
              Componente externo — não alterado.
              ================================================================ -->
@@ -212,15 +212,46 @@
                 </div>
             </a>
 
-            <div class="menu-item active" id="menuAgendamentos">
-                <i class="fa-regular fa-calendar"></i>
-                <span>Agendamentos</span>
+            <div class="menu-item" id="menuDisciplinas">
+               <i class="fa-solid fa-graduation-cap"></i>
+                <span>Disciplinas</span>
             </div>
 
-            <div class="menu-item" id="menuNotificacoes">
-                <i class="fa-regular fa-bell"></i>
-                <span>Histórico</span>
+            <div class="menu-item" id="menuAvisos">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Avisos</span>
             </div>
+
+            <div class="menu-item" id="menuMensagens">
+                <i class="fa-regular fa-envelope"></i>
+                <span>Mensagens</span>
+            </div>
+
+            <div class="menu-item" id="menuConquistas">
+               <i class="fa-solid fa-award"></i>
+                <span>Conquistas</span>
+            </div>
+
+            <div class="menu-item" id="menuCalendario">
+                <i class="fa-regular fa-calendar-days"></i>
+                <span>Calendário</span>
+            </div>
+
+            <div class="menu-item" id="menuFerramentas">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <span>Ferramentas</span>
+            </div>
+
+            <div class="menu-item" id="menuComunidades">
+               <i class="fa-solid fa-users"></i>
+                <span>Comunidades</span>
+            </div>
+
+            <div class="menu-item active" id="menuReunioes">
+                <i class="fa-regular fa-calendar"></i>
+                <span>Reuniões</span>
+            </div>
+
 
         </aside> 
 
@@ -330,9 +361,9 @@
          ================================================================ -->
 
     <script src="js/main.js"></script>
-    <script src="js/sidebar.js"></script>
-    <script src="js/notifications.js"></script>
-    <script src="js/account.js"></script>
+    <script src="components/header/account.js"></script>
+    <script src="components/header/notifications.js"></script>
+    <script src="components/sidebar/sidebar.js"></script>
     <script src="js/modal.js"></script>
 
 </body>
