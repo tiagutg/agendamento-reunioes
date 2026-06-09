@@ -49,28 +49,35 @@ O sistema foi desenvolvido para facilitar:
 # 📂 Estrutura do Projeto
 
 ```bash
-AgendeUnisales/
+AGENDEUNISALES/
 │
-├── css/
-│   ├── account.css
-│   ├── header.css
+├── components/               
+│   ├── header/               
+│   │   ├── account.css
+│   │   ├── account.js
+│   │   ├── header.css
+│   │   ├── header.html
+│   │   ├── notifications.css
+│   │   └── notifications.js
+│   │
+│   └── sidebar/              
+│       ├── sidebar.css
+│       ├── sidebar.html
+│       └── sidebar.js
+│
+├── css/                      
 │   ├── modal.css
-│   ├── notifications.css
 │   ├── responsive.css
-│   ├── sidebar.css
 │   └── style.css
 │
-├── img/
+├── img/                      
 │   └── logoUniSales.png
 │
-├── js/
-│   ├── account.js
+├── js/                       
 │   ├── main.js
-│   ├── modal.js
-│   ├── notifications.js
-│   └── sidebar.js
+│   └── modal.js
 │
-├── index.html
+├── index.html                
 └── README.md
 ```
 
