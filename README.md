@@ -1,19 +1,5 @@
 # 📅 Sistema de Agendamento Acadêmico
 
-<p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/SEU-USUARIO/agendamento-reunioes?color=%232f4050">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/SEU-USUARIO/agendamento-reunioes?color=%232f4050">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/SEU-USUARIO/agendamento-reunioes?color=%232f4050">
-</p>
-
-<p align="center">
-  <a href="#-sobre-o-projeto">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-funcionalidades">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-como-executar">Como Executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-layout-e-arquitetura">Interface</a>
-</p>
-
 ---
 
 ## 💻 Sobre o Projeto
