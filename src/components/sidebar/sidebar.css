@@ -9,10 +9,9 @@
 /* ================================================================
    SIDEBAR — ESTADO NORMAL
    ================================================================ */
-
 #sidebar {
     width: 230px; 
-    transition: all 0.3s ease;
+    transition: width 0.3s ease; /* Controla o efeito suave de deslizar */
     overflow: hidden;
     position: fixed;
     top: 70px;
@@ -20,12 +19,8 @@
     height: calc(100vh - 70px);
     background: white;
     z-index: 1500;
-}
-
-aside {
-    width: 200px; 
-    background: #ffffff;
     border-right: 1px solid #d9e1e8;
+    box-sizing: border-box;
 }
 
 
@@ -33,7 +28,6 @@ aside {
    SIDEBAR — ESTADO RECOLHIDO (desktop)
    Oculta textos, exibe apenas ícones.
    ================================================================ */
-
 #sidebar.hidden {
     width: 60px; 
 }
@@ -45,6 +39,7 @@ aside {
 #sidebar.hidden .menu-item {
     justify-content: center;
     padding: 14px 0; 
+    border-left: 4px solid transparent;
 }
 
 #sidebar.hidden .search input {
@@ -58,7 +53,6 @@ aside {
 /* ================================================================
    CAMPO DE BUSCA INTERNA
    ================================================================ */
-
 .search {
     background: #2f4050;
     padding: 8px; 
@@ -75,7 +69,7 @@ aside {
     border: none;
     border-radius: 4px;
     background: #5b6b7a;
-    padding: 0 10px 0 34px; /* AJUSTADO: Margens internas */
+    padding: 0 10px 0 34px; 
     color: white;
     outline: none;
     box-sizing: border-box;
@@ -97,13 +91,13 @@ aside {
     font-size: 14px; 
     line-height: 1;
     pointer-events: none;
+    color: white;
 }
 
 
 /* ================================================================
    ITENS DO MENU
    ================================================================ */
-
 .menu-item {
     display: flex;
     align-items: center;
@@ -113,18 +107,20 @@ aside {
     font-size: 14px; 
     color: #34495e;
     border-left: 4px solid transparent; 
+    transition: background 0.2s ease;
 }
 
 .menu-item i {
-    font-size: 15px; 
-
+    font-size: 15px;
+    width: 20px;
+    text-align: center;
 }
 
 .menu-item:hover {
     background: #f0f2f4;
 }
 
-/* Item ativo com destaque vermelho */
+/* Item ativo com destaque vermelho/escuro */
 .menu-item.active {
     background: #e6e8ea;
     border-left: 4px solid #34495e; 
