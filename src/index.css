@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
-/* Importações baseadas na sua estrutura de pastas dentro do src */
-@import "./css/style.css";
+/* Importações dos componentes que realmente existem na pasta src/components */
 @import "./components/header/header.css";
 @import "./components/header/notifications.css";
 @import "./components/header/account.css";
 @import "./components/sidebar/sidebar.css";
-@import "./css/modal.css";
-@import "./css/responsive.css";
+@import "./components/meetings/meetings.css";

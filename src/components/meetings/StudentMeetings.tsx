@@ -36,24 +36,215 @@ interface ConfirmModal {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   DADOS DOS PROFESSORES
+   DADOS DOS PROFESSORES (SINCRONIZADO COM O AVA)
 ═══════════════════════════════════════════════════════════════ */
-const PROFESSORS_CONFIG: Record<string, { slots: string[], daysOfWeek: number[], role: string, subject: string }> = {
-  "Prof. João Silva":      { role: "Docente",      subject: "Engenharia de Software", slots: ["08:00","09:30","14:00","15:30"],       daysOfWeek: [1,3,5] },
-  "Profª. Maria Souza":   { role: "Docente",      subject: "Matemática Aplicada",    slots: ["10:00","11:00","16:00","17:00","19:00"], daysOfWeek: [2,4]   },
-  "Coord. Carlos Mendes": { role: "Coordenador",  subject: "Coordenação de Curso",   slots: ["09:00","14:30","15:00","20:00"],         daysOfWeek: [1,2,3,4,5] },
-  "Profª. Ana Lima":      { role: "Docente",      subject: "Banco de Dados",         slots: ["08:30","10:00","13:30","16:00"],         daysOfWeek: [1,3]   },
-  "Prof. Ricardo Torres": { role: "Docente",      subject: "Cálculo I e II",         slots: ["07:30","09:00","15:00","16:30"],         daysOfWeek: [2,4,5] },
-  "Profª. Fernanda Melo": { role: "Docente",      subject: "Programação Web",        slots: ["08:00","10:30","14:00","17:00"],         daysOfWeek: [1,3,4] },
+interface ProfessorInfo {
+  readonly role: 'Docente' | 'Coordenador'
+  readonly subject: string
+  readonly slots: readonly string[]
+  readonly daysOfWeek: readonly number[]
 }
+
+const PROFESSORS_CONFIG = {
+  "Prof. Alexandre Beletti":    { role: "Docente", subject: "Arquitetura e Organização de Computadores", slots: ["08:00", "09:30", "14:00", "15:30"], daysOfWeek: [1, 3, 5] },
+  "Prof. Geraldo Magela":       { role: "Docente", subject: "Lógica de Programação", slots: ["10:00", "11:00", "16:00", "17:00", "19:00"], daysOfWeek: [2, 4] },
+  "Prof. Inacio de Loyola":     { role: "Docente", subject: "Teoria Geral dos Sistemas", slots: ["09:00", "14:30", "15:00", "20:00"], daysOfWeek: [1, 2, 3, 4, 5] },
+  "Prof. Marcos de Assis":      { role: "Docente", subject: "Algoritmos e Estrutura de Dados", slots: ["08:30", "10:00", "13:30", "16:00"], daysOfWeek: [1, 3] },
+  "Profª. Priscilla de Souza":  { role: "Docente", subject: "Português Instrumental", slots: ["07:30", "09:00", "15:00", "16:30"], daysOfWeek: [2, 4, 5] },
+  "Prof. Wellington de Souza":  { role: "Docente", subject: "Introdução à Informática", slots: ["08:00", "10:30", "14:00", "17:00"], daysOfWeek: [1, 3, 4] },
+} as const satisfies Record<string, ProfessorInfo>
 
 const FORMAT_OPTIONS = [
   { value: 'Presencial', icon: 'fa-solid fa-building',     label: 'Presencial' },
   { value: 'Híbrido',    icon: 'fa-solid fa-house-laptop', label: 'Híbrido'    },
   { value: 'Online',     icon: 'fa-solid fa-video',        label: 'Online'     },
-]
+] as const
 
-const DAY_NAMES = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb']
+const DAY_NAMES = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'] as const
+
+// Função auxiliar para gerar as iniciais (ex: "Prof. Alexandre Beletti" -> "AB")
+function getInitials(fullName: string): string {
+  const cleanName = fullName.replace(/^(Prof\.|Profª\.|Coord\.)\s+/, '').trim()
+  const parts = cleanName.split(/\s+/).filter(p => p.length > 0)
+  if (parts.length === 0) return ''
+  if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase()
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENTE: PROFESSOR AUTOCOMPLETE (AVATAR DE LETRAS & CARD PREMIUM)
+═══════════════════════════════════════════════════════════════ */
+function ProfessorAutocomplete({
+  value,
+  onChange,
+  disabled,
+}: {
+  value: string
+  onChange: (name: string) => void
+  disabled: boolean
+}) {
+  const [query, setQuery]     = useState(value)
+  const [open, setOpen]       = useState(false)
+  const [focused, setFocused] = useState(false)
+  const wrapRef               = useRef<HTMLDivElement>(null)
+
+  useEffect(() => { 
+    setQuery(value) 
+  }, [value])
+
+  const filtered = query.trim().length >= 1
+    ? Object.entries(PROFESSORS_CONFIG).filter(([name]) => name.toLowerCase().includes(query.toLowerCase()))
+    : Object.entries(PROFESSORS_CONFIG)
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false)
+        if (!Object.keys(PROFESSORS_CONFIG).includes(query)) {
+          setQuery(value)
+        }
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [query, value])
+
+  const handleSelect = (name: string) => {
+    setQuery(name)
+    setOpen(false)
+    onChange(name)
+  }
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value)
+    setOpen(true)
+    if (!e.target.value) onChange('')
+  }
+
+  const selectedProfessorData = Object.keys(PROFESSORS_CONFIG).includes(value)
+    ? PROFESSORS_CONFIG[value as keyof typeof PROFESSORS_CONFIG]
+    : null
+
+  return (
+    <div ref={wrapRef} style={{ position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      
+      {/* Campo Input de Pesquisa */}
+      <div 
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          border: selectedProfessorData ? '1px solid #10b981' : (focused ? '1px solid #2f4050' : '1px solid #e2e8f0'),
+          borderRadius: '8px',
+          padding: '10px 12px',
+          backgroundColor: '#f8fafc',
+          boxSizing: 'border-box',
+          width: '100%',
+          transition: 'all 0.2s ease',
+          boxShadow: focused ? '0 0 0 3px rgba(47, 64, 80, 0.06)' : 'none'
+        }}
+      >
+        <i className="fa-solid fa-user-tie" style={{ color: selectedProfessorData ? '#10b981' : '#94a3b8', fontSize: '13px', flexShrink: 0 }}></i>
+        <input
+          type="text"
+          placeholder="Busque pelo nome do docente..."
+          style={{ flex: 1, width: '100%', background: 'transparent', border: 'none', outline: 'none', fontSize: '12px', color: '#2f4050', fontWeight: 500, padding: 0, margin: 0 }}
+          value={query}
+          onChange={handleInput}
+          onFocus={() => { setFocused(true); setOpen(true) }}
+          onBlur={() => setFocused(false)}
+          disabled={disabled}
+          autoComplete="off"
+        />
+        {query && !disabled && (
+          <button type="button" style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center', flexShrink: 0 }} onMouseDown={e => { e.preventDefault(); setQuery(''); onChange(''); setOpen(true) }}>
+            <i className="fa-solid fa-xmark" style={{ fontSize: '12px' }}></i>
+          </button>
+        )}
+      </div>
+
+      {/* Dropdown de Sugestões Flutuantes */}
+      {open && !disabled && filtered.length > 0 && (
+        <div style={{ position: 'absolute', left: 0, right: 0, top: '44px', backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', boxShadow: '0 12px 30px rgba(0, 0, 0, 0.08)', zIndex: 9999, maxHeight: '220px', overflowY: 'auto', padding: '6px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          {filtered.map(([name, cfg]) => {
+            const isCurrentActive = name === value;
+            return (
+              <button 
+                key={name} 
+                type="button" 
+                style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '100%', textAlign: 'left', padding: '10px 12px', borderRadius: '8px', border: 'none', cursor: 'pointer', backgroundColor: isCurrentActive ? '#2f4050' : 'transparent', color: isCurrentActive ? '#ffffff' : '#334155', transition: 'background-color 0.15s' }} 
+                className={isCurrentActive ? '' : 'hover-dropdown-item'} 
+                onMouseDown={e => { e.preventDefault(); handleSelect(name) }}
+              >
+                {/* Iniciais Circulares (Ex: AB) */}
+                <div style={{ width: '34px', height: '34px', borderRadius: '50%', display: 'flex', alignItems: 'center', fontSize: '11px', fontWeight: 700, flexShrink: 0, backgroundColor: isCurrentActive ? 'rgba(255, 255, 255, 0.2)' : '#e2e8f0', color: isCurrentActive ? '#ffffff' : '#475569', justifyContent: 'center', letterSpacing: '0.5px' }}>
+                  {getInitials(name)}
+                </div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, gap: '2px' }}>
+                  <span style={{ fontSize: '12px', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</span>
+                  <span style={{ fontSize: '11px', display: 'flex', alignItems: 'center', gap: '6px', color: isCurrentActive ? '#cbd5e1' : '#64748b' }}>
+                    <span style={{ padding: '2px 6px', fontSize: '9px', fontWeight: 700, borderRadius: '4px', textTransform: 'uppercase', backgroundColor: isCurrentActive ? 'rgba(255,255,255,0.15)' : '#f1f5f9', color: isCurrentActive ? '#ffffff' : '#475569' }}>{cfg.role}</span>
+                    <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{cfg.subject}</span>
+                  </span>
+                </div>
+                {isCurrentActive && <i className="fa-solid fa-check" style={{ fontSize: '11px', color: '#10b981', marginRight: '4px' }}></i>}
+              </button>
+            )
+          })}
+        </div>
+      )}
+
+      {/* Card Informativo após a Seleção */}
+      {selectedProfessorData && (
+        <div 
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e2e8f0',
+            borderLeft: '4px solid #10b981',
+            borderRadius: '8px',
+            padding: '12px 14px',
+            marginTop: '2px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.02)'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {/* Letras Iniciais no Card Informativo */}
+            <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: '#f1f5f9', color: '#2f4050', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 700, flexShrink: 0 }}>
+              {getInitials(value)}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+              <span style={{ fontSize: '11px', textTransform: 'uppercase', fontWeight: 700, color: '#10b981', letterSpacing: '0.5px' }}>
+                {selectedProfessorData.role} Selecionado
+              </span>
+              <span style={{ fontSize: '13px', fontWeight: 700, color: '#2f4050', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {value}
+              </span>
+            </div>
+          </div>
+
+          <div style={{ borderTop: '1px dashed #e2e8f0', paddingTop: '8px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '6px', fontSize: '11px', color: '#64748b' }}>
+              <i className="fa-solid fa-graduation-cap" style={{ marginTop: '2px', color: '#94a3b8', width: '14px' }}></i>
+              <span><strong>Cadeira:</strong> {selectedProfessorData.subject}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#64748b' }}>
+              <i className="fa-solid fa-calendar-days" style={{ color: '#94a3b8', width: '14px' }}></i>
+              <span>
+                <strong>Dias disponíveis:</strong> {selectedProfessorData.daysOfWeek.map(d => DAY_NAMES[d]).join(', ')}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
+    </div>
+  )
+}
 
 /* ═══════════════════════════════════════════════════════════════
    TOAST
@@ -205,120 +396,7 @@ function CalendarPortal({
   )
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PROFESSOR AUTOCOMPLETE
-═══════════════════════════════════════════════════════════════ */
-function ProfessorAutocomplete({
-  value,
-  onChange,
-  disabled,
-}: {
-  value: string
-  onChange: (name: string) => void
-  disabled: boolean
-}) {
-  const [query, setQuery]     = useState(value)
-  const [open, setOpen]       = useState(false)
-  const [focused, setFocused] = useState(false)
-  const wrapRef               = useRef<HTMLDivElement>(null)
 
-  /* sincroniza query quando value muda externamente (ex: resetForm) */
-  useEffect(() => { setQuery(value) }, [value])
-
-  const filtered = query.trim().length >= 1
-    ? Object.entries(PROFESSORS_CONFIG).filter(([name]) =>
-        name.toLowerCase().includes(query.toLowerCase())
-      )
-    : Object.entries(PROFESSORS_CONFIG)
-
-  /* fechar ao clicar fora */
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
-        setOpen(false)
-        /* se não confirmou seleção, reseta para o valor atual */
-        if (!Object.keys(PROFESSORS_CONFIG).includes(query)) {
-          setQuery(value)
-        }
-      }
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [query, value])
-
-  const handleSelect = (name: string) => {
-    setQuery(name)
-    setOpen(false)
-    onChange(name)
-  }
-
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value)
-    setOpen(true)
-    if (!e.target.value) onChange('')
-  }
-
-  const isSelected = Object.keys(PROFESSORS_CONFIG).includes(query) && query === value
-
-  return (
-    <div ref={wrapRef} className="professor-autocomplete">
-      <div className={`professor-input-wrap ${isSelected ? 'selected' : ''} ${focused ? 'focused' : ''}`}>
-        <i className="fa-solid fa-user-tie prof-input-icon"></i>
-        <input
-          type="text"
-          placeholder="Digite o nome do professor ou coordenador..."
-          value={query}
-          onChange={handleInput}
-          onFocus={() => { setFocused(true); setOpen(true) }}
-          onBlur={() => setFocused(false)}
-          disabled={disabled}
-          autoComplete="off"
-        />
-        {query && !disabled && (
-          <button
-            type="button"
-            className="prof-clear-btn"
-            onMouseDown={e => { e.preventDefault(); setQuery(''); onChange(''); setOpen(true) }}
-          >
-            <i className="fa-solid fa-xmark"></i>
-          </button>
-        )}
-      </div>
-
-      {open && !disabled && filtered.length > 0 && (
-        <div className="professor-dropdown">
-          {filtered.map(([name, cfg]) => (
-            <button
-              key={name}
-              type="button"
-              className={`professor-option ${name === value ? 'active' : ''}`}
-              onMouseDown={e => { e.preventDefault(); handleSelect(name) }}
-            >
-              <div className="prof-option-avatar">{name.replace(/^(Prof\.|Profª\.|Coord\.)\s+/, '').charAt(0)}</div>
-              <div className="prof-option-info">
-                <span className="prof-option-name">{name}</span>
-                <span className="prof-option-meta">
-                  <span className="prof-role-badge">{cfg.role}</span>
-                  {cfg.subject}
-                </span>
-              </div>
-              {name === value && <i className="fa-solid fa-check prof-check"></i>}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {open && !disabled && filtered.length === 0 && query.length > 0 && (
-        <div className="professor-dropdown">
-          <div className="professor-no-results">
-            <i className="fa-solid fa-magnifying-glass"></i>
-            Nenhum professor encontrado para "{query}"
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
 
 /* ═══════════════════════════════════════════════════════════════
    COMPONENTE PRINCIPAL
@@ -617,7 +695,7 @@ export function StudentMeetings() {
 
             <form onSubmit={handleSubmit} className="acad-interactive-form">
 
-              {/* ETAPA 1: PROFESSOR (autocomplete) */}
+ {/* ETAPA 1: PROFESSOR (autocomplete) */}
               <div className="acad-field-block">
                 <label><span className="step-num">1</span> Professor ou Coordenador</label>
                 <ProfessorAutocomplete
@@ -625,18 +703,7 @@ export function StudentMeetings() {
                   onChange={handleProfessorChange}
                   disabled={!!editingId}
                 />
-                {professor && PROFESSORS_CONFIG[professor] && (
-                  <div className="prof-selected-info">
-                    <span className="prof-info-chip">
-                      <i className="fa-solid fa-book"></i>
-                      {PROFESSORS_CONFIG[professor].subject}
-                    </span>
-                    <span className="prof-info-chip">
-                      <i className="fa-regular fa-calendar"></i>
-                      {PROFESSORS_CONFIG[professor].daysOfWeek.map(d => DAY_NAMES[d]).join(', ')}
-                    </span>
-                  </div>
-                )}
+                {/* O bloco antigo feio que poluía o visual foi removido completamente daqui, pois o Autocomplete agora gerencia o próprio Card Premium internamente! */}
               </div>
 
               {/* ETAPA 2: DATA */}

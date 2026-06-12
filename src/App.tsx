@@ -7,7 +7,7 @@ import './components/header/notifications.css'
 import './components/sidebar/sidebar.css'
 
 // Importando o novo core encapsulado de Agendamentos
-import { StudentMeetings } from './components/meetings/StudentMeetings'
+import { StudentMeetings } from './components/meetings/StudentMeetings.js'
 
 // Importando as lógicas antigas estruturais
 import { initAccount } from './components/header/account.js'
