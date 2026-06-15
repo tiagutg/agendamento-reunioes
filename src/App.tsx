@@ -4,6 +4,7 @@ import './components/header/header.css'
 import './components/header/account.css'
 import './components/header/notifications.css'
 import './components/sidebar/sidebar.css'
+import logoUniSales from './img/logoUniSales.png'
 
 import { Login } from './components/login/login.tsx'
 import { StudentMeetings } from './components/meetings/StudentMeetings.tsx'
@@ -60,11 +61,13 @@ function App() {
   return (
     <>
       {/* HEADER INSTITUCIONAL */}
+   {/* HEADER INSTITUCIONAL */}
       <header>
         <div className="header-left">
           <div className="menu-icon" id="menuToggle" style={{ cursor: 'pointer' }}>☰</div>
           <div className="logo">
-            <img src="/src/img/logoUniSales.png" alt="Logo UniSales" />
+            {/* CORRIGIDO: Agora usa a variável importada entre chaves e sem aspas */}
+            <img src={logoUniSales} alt="Logo UniSales" />
           </div>
         </div>
 

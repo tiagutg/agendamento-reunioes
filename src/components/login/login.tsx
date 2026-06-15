@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import imgLogin from '../../img/ImgLoginUnisales.png';
+import imgLogin from '../../img/ImgLoginUnisales.png'
+import logoUniSales from '../../img/logoUniSales.png'
 
 interface LoginProps {
   onLoginSuccess: (username: string, role: 'student' | 'professor') => void;
@@ -54,15 +55,15 @@ export function Login({ onLoginSuccess }: LoginProps) {
         
         {/* Imagem oficial do AVA UniSales */}
         <img 
-  src={imgLogin}
-  alt="Estudante no Notebook UniSales"
-  style={{
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    display: 'block'
-  }}
-/>
+          src={imgLogin}
+          alt="Estudante no Notebook UniSales"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block'
+          }}
+        />
       </div>
 
       {/* ================= METADE DIREITA: FORMULÁRIO CENTRALIZADO ================= */}
@@ -80,10 +81,10 @@ export function Login({ onLoginSuccess }: LoginProps) {
           padding: '20px',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center' // Garante centralização vertical de todos os filhos
+          alignItems: 'center' 
         }}>
           
-          {/* LOGO UNISALES CENTRALIZADA */}
+          {/* LOGO UNISALES CENTRALIZADA (CORRIGIDA PARA PRODUÇÃO) */}
           <div style={{ 
             display: 'flex',
             justifyContent: 'center',
@@ -92,7 +93,7 @@ export function Login({ onLoginSuccess }: LoginProps) {
             marginBottom: '20px' 
           }}>
             <img 
-              src="/src/img/logoUniSales.png" 
+              src={logoUniSales} // 
               alt="Logo UniSales" 
               style={{ maxWidth: '210px', height: 'auto', display: 'block', margin: '0 auto' }} 
             />
@@ -122,7 +123,6 @@ export function Login({ onLoginSuccess }: LoginProps) {
               }}>Usuário</label>
               
               <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-                {/* Ícone Vetorial de Usuário do AVA */}
                 <svg style={{ position: 'absolute', left: '14px', width: '16px', height: '16px', fill: '#94a3b8' }} viewBox="0 0 24 24">
                   <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
@@ -160,7 +160,6 @@ export function Login({ onLoginSuccess }: LoginProps) {
               }}>Senha</label>
               
               <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-                {/* Ícone Vetorial de Cadeado do AVA */}
                 <svg style={{ position: 'absolute', left: '14px', width: '16px', height: '16px', fill: '#94a3b8' }} viewBox="0 0 24 24">
                   <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
                 </svg>
@@ -181,7 +180,6 @@ export function Login({ onLoginSuccess }: LoginProps) {
                     outline: 'none'
                   }}
                 />
-                {/* Ícone do Olho Visualizador do AVA */}
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -203,11 +201,6 @@ export function Login({ onLoginSuccess }: LoginProps) {
                 </button>
               </div>
             </div>
-
-            {/* Dica opcional para desenvolvedor */}
-            <small style={{ color: '#cbd5e1', fontSize: '10px', marginTop: '-12px', textAlign: 'left' }}>
-              
-            </small>
 
             {/* BOTÃO ENTRAR CORPORATIVO ACINZENTADO */}
             <button type="submit" style={{
