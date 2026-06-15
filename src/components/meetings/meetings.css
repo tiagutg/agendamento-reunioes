@@ -754,8 +754,15 @@
 
 .appt-topic       { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
 .appt-description {
-  font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 10px;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2; 
+  overflow: hidden;
 }
 
 .appt-card-footer {
@@ -840,4 +847,635 @@
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 4px;
+}
+
+/* ================================================================
+   PROFESSOR
+   ================================================================ */
+/* ================================================================
+   ADIÇÕES ao meetings.css — Módulo do Professor
+   Adicionar ao final do arquivo meetings.css existente
+   ================================================================ */
+
+/* ── CALENDÁRIO DO PROFESSOR ─────────────────────────────────── */
+.prof-calendar-side {
+  overflow: visible;
+}
+
+.prof-legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.prof-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.prof-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.prof-calendar-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 24px;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* FullCalendar dentro do painel do professor */
+.prof-calendar-side .fc .fc-event {
+  cursor: pointer;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 2px 5px !important;
+}
+
+.prof-calendar-side .fc .fc-event:hover {
+  filter: brightness(0.92);
+}
+
+.prof-calendar-side .fc .fc-toolbar-title {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+}
+
+.prof-calendar-side .fc .fc-button {
+  font-size: 11px !important;
+  padding: 4px 10px !important;
+  background: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #475569 !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+.prof-calendar-side .fc .fc-button:hover {
+  background: #e2e8f0 !important;
+}
+
+.prof-calendar-side .fc .fc-button-active {
+  background: #2f4050 !important;
+  border-color: #2f4050 !important;
+  color: #fff !important;
+}
+
+/* ── TOOLTIP DO CALENDÁRIO ──────────────────────────────────── */
+.prof-cal-tooltip {
+  position: fixed;
+  z-index: 9999;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  min-width: 180px;
+  pointer-events: none;
+}
+
+.prof-cal-tooltip-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.prof-cal-tooltip-row {
+  font-size: 12px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+/* ── PAINEL LATERAL PROFESSOR ───────────────────────────────── */
+.prof-panel-side {
+  overflow-y: auto;
+  max-height: calc(100vh - 180px);
+}
+
+.prof-panel-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Saudação */
+.prof-panel-greeting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.prof-avatar-lg {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #2f4050;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.prof-panel-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px;
+}
+
+.prof-panel-subject {
+  font-size: 11px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* Stats */
+.prof-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.prof-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.prof-stat-card.pending  { border-top: 3px solid #f59e0b; }
+.prof-stat-card.accepted { border-top: 3px solid #10b981; }
+.prof-stat-card.week     { border-top: 3px solid #3b82f6; }
+
+.prof-stat-num   { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1; }
+.prof-stat-label { font-size: 10px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 4px; }
+
+/* Próxima reunião */
+.prof-next-meeting {
+  background: #f0fdf4;
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.prof-next-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: #16a34a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.prof-next-student {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px;
+}
+
+.prof-next-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.prof-next-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Seção */
+.prof-section-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Ações rápidas */
+.prof-quick-actions { display: flex; flex-direction: column; }
+
+.prof-quick-btn {
+  width: 100%;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.prof-quick-btn:hover { background: #f8fafc; border-color: #94a3b8; color: #0f172a; }
+
+/* Disponibilidade inline */
+.prof-avail-section { display: flex; flex-direction: column; }
+
+/* ── DETALHE DA REUNIÃO ─────────────────────────────────────── */
+.prof-panel-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.prof-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.prof-back-btn:hover { background: #f8fafc; color: #334155; }
+
+.prof-detail-student {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.prof-student-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #2f4050;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.prof-student-name  { font-size: 15px; font-weight: 700; color: #0f172a; margin: 0 0 2px; }
+.prof-student-label { font-size: 11px; color: #94a3b8; margin: 0; }
+
+.prof-detail-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.prof-detail-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.prof-detail-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: #475569;
+}
+.prof-detail-info-row i { color: #94a3b8; width: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.prof-detail-topic       { font-size: 14px; font-weight: 700; color: #0f172a; }
+.prof-detail-description { font-size: 12px; color: #64748b; line-height: 1.6; margin: 0; }
+
+.prof-rejection-note {
+  display: flex;
+  gap: 8px;
+  background: #fef9c3;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #92400e;
+}
+.prof-rejection-note i { flex-shrink: 0; margin-top: 1px; }
+
+/* Botões de ação do professor */
+.prof-detail-actions { display: flex; flex-direction: column; gap: 8px; }
+
+.prof-action-accept {
+  width: 100%;
+  padding: 11px;
+  background: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.prof-action-accept:hover:not(:disabled) { background: #059669; }
+.prof-action-accept:disabled             { opacity: 0.6; cursor: not-allowed; }
+
+.prof-action-reject {
+  width: 100%;
+  padding: 11px;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.prof-action-reject:hover:not(:disabled) { background: #dc2626; }
+.prof-action-reject:disabled             { opacity: 0.6; cursor: not-allowed; }
+
+.prof-action-cancel-outline {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid #fca5a5;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.prof-action-cancel-outline:hover:not(:disabled) { background: #fef2f2; border-color: #ef4444; }
+
+/* Caixa de justificativa */
+.prof-reason-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.prof-reason-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.prof-reason-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #0f172a;
+  background: #fff;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+.prof-reason-input:focus { border-color: #2f4050; box-shadow: 0 0 0 3px rgba(47,64,80,0.08); }
+
+.prof-reason-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── AVAILABILITY MANAGER ───────────────────────────────────── */
+.avail-manager {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.avail-section-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.avail-days-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.avail-day-chip {
+  padding: 5px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.avail-day-chip:hover  { border-color: #94a3b8; color: #334155; }
+.avail-day-chip.active { background: #2f4050; border-color: #2f4050; color: #fff; }
+
+.avail-slots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.avail-empty-hint {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.avail-slot-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+.avail-slot-time {
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.avail-slot-remove {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: all 0.15s;
+}
+.avail-slot-remove:hover { background: #fef2f2; }
+
+.avail-add-row {
+  display: flex;
+  gap: 8px;
+}
+
+.avail-time-input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+.avail-time-input:focus { border-color: #2f4050; background: #fff; }
+
+.avail-add-btn {
+  padding: 8px 14px;
+  background: #2f4050;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.avail-add-btn:hover:not(:disabled) { background: #1e2a36; }
+.avail-add-btn:disabled             { opacity: 0.5; cursor: not-allowed; }
+
+.avail-save-btn {
+  width: 100%;
+  padding: 11px;
+  background: #2f4050;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s;
+  font-family: inherit;
+  margin-top: 4px;
+}
+.avail-save-btn:hover:not(:disabled) { background: #1e2a36; }
+.avail-save-btn:disabled             { opacity: 0.6; cursor: not-allowed; }
+
+/* ── RESPONSIVIDADE ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .prof-stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .prof-panel-side { max-height: none; }
+}
+
+@media (max-width: 640px) {
+  .prof-stats-grid      { grid-template-columns: 1fr 1fr; }
+  .prof-next-meta       { gap: 8px; }
+  .prof-legend-row      { gap: 6px; }
+  .avail-days-row       { gap: 4px; }
+  .avail-day-chip       { font-size: 11px; padding: 4px 9px; }
+}
+
+/* ── acad-time-btn — estado bloqueado ───────────────────────── */
+.acad-time-btn.booked {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #cbd5e1;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* acad-field-hint com aviso */
+.acad-field-hint.warn {
+  color: #ca8a04;
 }
