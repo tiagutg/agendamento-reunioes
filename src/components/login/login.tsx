@@ -206,7 +206,7 @@ export function Login({ onLoginSuccess }: LoginProps) {
 
             {/* Dica opcional para desenvolvedor */}
             <small style={{ color: '#cbd5e1', fontSize: '10px', marginTop: '-12px', textAlign: 'left' }}>
-              * Digite "prof" para painel docente.
+              
             </small>
 
             {/* BOTÃO ENTRAR CORPORATIVO ACINZENTADO */}
