@@ -7,6 +7,7 @@ import './components/sidebar/sidebar.css'
 import logoUniSales from './img/logoUniSales.png'
 
 import { Login } from './components/login/login.tsx'
+import { Home } from './components/home/Home.tsx'
 import { StudentMeetings } from './components/meetings/StudentMeetings.tsx'
 import { ProfessorMeetings } from './components/meetings/ProfessorMeetings.tsx'
 
@@ -175,7 +176,6 @@ function App() {
             overflowY: 'auto'
           }}
         >
-          {/* Caixa de busca reposicionada de forma relativa dentro da área visível */}
           <div className="search" style={{ padding: '15px 10px 10px 10px' }}>
             <div className="search-box">
               <i className="fa-solid fa-magnifying-glass" id="searchToggle" style={{ cursor: 'pointer' }}></i>
@@ -245,41 +245,10 @@ function App() {
             minHeight: 'calc(100vh - 60px)',
           }}
         >
-          {/* TELA DE RENDERS */}
-          {telaAtiva === 'home' && (
-            <div style={{ animation: 'fadeIn 0.4s ease' }}>
-              <h1 className="page-title" style={{ fontSize: '24px', color: '#1e293b', marginBottom: '8px' }}>
-                Olá, {username.replace('.', ' ').toUpperCase()}!
-              </h1>
-              <p style={{ color: '#64748b', marginBottom: '20px' }}>Bem-vindo de volta ao Ambiente Virtual de Aprendizagem UniSales.</p>
-              
-              <div className="meeting-card" style={{ 
-                background: 'linear-gradient(135deg, #1e3a8a, #2563eb)', 
-                color: '#fff', 
-                padding: '25px', 
-                borderRadius: '8px',
-                boxShadow: '0 4px 12px rgba(37,99,235,0.15)',
-                marginBottom: '20px'
-              }}>
-                <h2 style={{ margin: 0, fontSize: '20px', fontWeight: '600' }}>Painel do {currentRole === 'professor' ? 'Professor' : 'Estudante'}</h2>
-                <p style={{ opacity: 0.9, fontSize: '14px', marginTop: '8px', maxWidth: '600px' }}>
-                  Fique por dentro das suas atividades acadêmicas. Acesse os seus agendamentos rápidos clicando no menu lateral na aba 
-                  <strong> {currentRole === 'professor' ? 'Atendimentos' : 'Reuniões'}</strong>.
-                </p>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '15px' }}>
-                <div className="meeting-card" onClick={() => navegarPara('reunioes')} style={{ cursor: 'pointer', borderLeft: '4px solid #10b981' }}>
-                  <h4 style={{ margin: '0 0 5px 0' }}>{currentRole === 'professor' ? 'Meus Atendimentos' : 'Minhas Reuniões'}</h4>
-                  <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>Gerenciar horários solicitados.</p>
-                </div>
-                <div className="meeting-card" onClick={() => navegarPara('notificacoes')} style={{ cursor: 'pointer', borderLeft: '4px solid #f59e0b' }}>
-                  <h4 style={{ margin: '0 0 5px 0' }}>Mural de Avisos</h4>
-                  <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>Ver notificações pendentes.</p>
-                </div>
-              </div>
-            </div>
-          )}
+          {/* RENDERIZADOR DE TELAS */}
+{telaAtiva === 'home' && (
+  <Home username={username} />
+)}
 
           {telaAtiva === 'reunioes' && (
             <div style={{ animation: 'fadeIn 0.3s ease' }}>
