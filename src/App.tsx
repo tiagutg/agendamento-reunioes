@@ -130,7 +130,7 @@ function App() {
 
       <div className="container" style={{ display: 'flex' }}>
 
-        {/* SIDEBAR */}
+      {/* SIDEBAR */}
         <aside id="sidebar">
           <div className="search">
             <div className="search-box">
@@ -139,8 +139,13 @@ function App() {
             </div>
           </div>
 
-          <div className="menu-item" id="menuHome"><i className="fa-solid fa-house"></i><span>Home</span></div>
-          <div className="menu-item" id="menuDisciplinas"><i className="fa-solid fa-graduation-cap"></i><span>Disciplinas</span></div>
+          <div className="menu-item" id="menuHome">
+            <i className="fa-solid fa-house"></i><span>Home</span>
+          </div>
+          
+          <div className="menu-item" id="menuDisciplinas">
+            <i className="fa-solid fa-graduation-cap"></i><span>Disciplinas</span>
+          </div>
 
           <div
             className={`menu-item ${telaAtiva === 'notificacoes' ? 'active' : ''}`}
@@ -150,8 +155,29 @@ function App() {
             <i className="fa-solid fa-bullhorn"></i><span>Avisos</span>
           </div>
 
-          <div className="menu-item" id="menuMensagens"><i className="fa-regular fa-envelope"></i><span>Mensagens</span></div>
-          <div className="menu-item" id="menuCalendario"><i className="fa-regular fa-calendar-days"></i><span>Calendário</span></div>
+          <div className="menu-item" id="menuMensagens">
+            <i className="fa-regular fa-envelope"></i><span>Mensagens</span>
+          </div>
+
+          {/* NOVA OPÇÃO: CONQUISTAS (Ícone de Medalha/Prêmio) */}
+          <div className="menu-item" id="menuConquistas">
+            <i className="fa-solid fa-award"></i><span>Conquistas</span>
+          </div>
+
+          <div className="menu-item" id="menuCalendario">
+            <i className="fa-regular fa-calendar-days"></i><span>Calendário</span>
+          </div>
+
+
+          {/* NOVA OPÇÃO: FERRAMENTAS (Ícone de Chave e Martelo) */}
+          <div className="menu-item" id="menuFerramentas">
+            <i className="fa-solid fa-screwdriver-wrench"></i><span>Ferramentas</span>
+          </div>
+
+          {/* NOVA OPÇÃO: COMUNIDADES (Ícone de Grupo/Usuários) */}
+          <div className="menu-item" id="menuComunidades">
+            <i className="fa-solid fa-users"></i><span>Comunidades</span>
+          </div>
 
           <div
             className={`menu-item ${telaAtiva === 'reunioes' ? 'active' : ''}`}
@@ -161,6 +187,7 @@ function App() {
             <i className="fa-regular fa-calendar"></i>
             <span>{currentRole === 'professor' ? 'Atendimentos' : 'Reuniões'}</span>
           </div>
+          
         </aside>
 
         {/* CONTEÚDO PRINCIPAL (COM RECUO DE SEGURANÇA PARA O HEADER) */}
