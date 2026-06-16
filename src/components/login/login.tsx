@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import imgLogin from '../../img/ImgLoginUnisales.png'
 import logoUniSales from '../../img/logoUniSales.png'
 
@@ -10,6 +10,17 @@ export function Login({ onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  
+  // Detecta se a tela atual é um dispositivo móvel (menor que 768px)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -33,42 +44,44 @@ export function Login({ onLoginSuccess }: LoginProps) {
       fontFamily: 'sans-serif'
     }}>
       
-      {/* ================= METADE ESQUERDA: FOTO ORIGINAL DO PORTAL COM OVERLAY ================= */}
-      <div style={{
-        position: 'relative',
-        width: '50%',
-        height: '100%',
-        display: 'block',
-        backgroundColor: '#111'
-      }}>
-        {/* Camada vermelha com a opacidade exata do sistema AVA */}
+      {/* ================= METADE ESQUERDA: FOTO (Só aparece se NÃO for celular) ================= */}
+      {!isMobile && (
         <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
+          position: 'relative',
+          width: '50%',
           height: '100%',
-          background: 'linear-gradient(135deg, rgba(145, 10, 35, 0.82), rgba(185, 15, 45, 0.68))',
-          mixBlendMode: 'multiply' as React.CSSProperties['mixBlendMode'],
-          zIndex: 2
-        }}></div>
-        
-        {/* Imagem oficial do AVA UniSales */}
-        <img 
-          src={imgLogin}
-          alt="Estudante no Notebook UniSales"
-          style={{
+          display: 'block',
+          backgroundColor: '#111'
+        }}>
+          {/* Camada vermelha com a opacidade exata do sistema AVA */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
             width: '100%',
             height: '100%',
-            objectFit: 'cover',
-            display: 'block'
-          }}
-        />
-      </div>
+            background: 'linear-gradient(135deg, rgba(145, 10, 35, 0.82), rgba(185, 15, 45, 0.68))',
+            mixBlendMode: 'multiply' as React.CSSProperties['mixBlendMode'],
+            zIndex: 2
+          }}></div>
+          
+          {/* Imagem oficial do AVA UniSales */}
+          <img 
+            src={imgLogin}
+            alt="Estudante no Notebook UniSales"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block'
+            }}
+          />
+        </div>
+      )}
 
-      {/* ================= METADE DIREITA: FORMULÁRIO CENTRALIZADO ================= */}
+      {/* ================= METADE DIREITA: FORMULÁRIO (Ocupa 100% no celular e 50% no computador) ================= */}
       <div style={{
-        width: '50%',
+        width: isMobile ? '100%' : '50%',
         height: '100%',
         display: 'flex',
         alignItems: 'center',
@@ -84,7 +97,7 @@ export function Login({ onLoginSuccess }: LoginProps) {
           alignItems: 'center' 
         }}>
           
-          {/* LOGO UNISALES CENTRALIZADA (CORRIGIDA PARA PRODUÇÃO) */}
+          {/* LOGO UNISALES CENTRALIZADA */}
           <div style={{ 
             display: 'flex',
             justifyContent: 'center',
@@ -93,7 +106,7 @@ export function Login({ onLoginSuccess }: LoginProps) {
             marginBottom: '20px' 
           }}>
             <img 
-              src={logoUniSales} // 
+              src={logoUniSales}
               alt="Logo UniSales" 
               style={{ maxWidth: '210px', height: 'auto', display: 'block', margin: '0 auto' }} 
             />
@@ -202,7 +215,7 @@ export function Login({ onLoginSuccess }: LoginProps) {
               </div>
             </div>
 
-            {/* BOTÃO ENTRAR CORPORATIVO ACINZENTADO */}
+            {/* BOTÃO ENTRAR */}
             <button type="submit" style={{
               background: '#273b4a',
               color: '#ffffff',

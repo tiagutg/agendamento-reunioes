@@ -136,3 +136,10 @@
     color: inherit;
     display: block;
 }
+
+@media (max-width: 768px) {
+  #sidebar {
+    position: fixed !important;
+    height: calc(100vh - 60px) !important;
+  }
+}
